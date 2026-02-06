@@ -2,6 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Tết 2026 - Bốc Thăm May Mắn</title>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -107,23 +108,28 @@ h1 {
         🧧 CÒN LẠI: <span id="count-left">80</span> SỐ
     </div>
 
-    <div id="number-display">00</div>
+    <div id="number-display">--</div>
 
     <button class="btn-draw" id="drawBtn" onclick="draw()">QUAY SỐ</button>
 </div>
 
 <script>
-let numbers = Array.from({length: 80}, (_, i) => i + 1);
+/* ===== DANH SÁCH 80 SỐ ===== */
+let numbers = Array.from({ length: 80 }, (_, i) => i + 1);
 
 function draw() {
-    if (numbers.length === 0) return alert("Đã hết số để bốc!");
+    if (numbers.length === 0) {
+        alert("Đã hết số để bốc!");
+        return;
+    }
 
     const btn = document.getElementById('drawBtn');
     btn.disabled = true;
 
     let count = 0;
     const interval = setInterval(() => {
-        const randomShow = Math.floor(Math.random() * 90 + 1);
+        // CHỈ CHẠY TỪ 1 → 80
+        const randomShow = Math.floor(Math.random() * 80) + 1;
         document.getElementById('number-display').innerText =
             randomShow.toString().padStart(2, '0');
 
@@ -153,7 +159,7 @@ function finalize() {
     document.getElementById('drawBtn').disabled = false;
 }
 
-// Hoa rơi
+/* ===== HOA RƠI ===== */
 function createPetal() {
     const petal = document.createElement('div');
     petal.className = 'petal';
@@ -164,7 +170,7 @@ function createPetal() {
     document.body.appendChild(petal);
     setTimeout(() => petal.remove(), 6000);
 }
-setInterval(createPetal, 400);
+setInterval(createPetal, 600);
 </script>
 
 </body>
